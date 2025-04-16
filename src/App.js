@@ -9,14 +9,19 @@ function App() {
 const CustomBlur = () => {
   // KODUNUZ BURAYA GELECEK
   const [range, setRange] = useState(0);
+  const [url, setUrl] = useState(BASE_IMG_URL);
+  useEffect(() => {
+    if (range > 0) {
+      setUrl(`${BASE_IMG_URL}?blur=${range}`);
+    } else {
+      setUrl(BASE_IMG_URL);
+    }
+  }, [range]);
 
   return (
     <>
       <div className="flex flex-col items-center m-[20px] gap-y-[150px]">
-        <img
-          src={range === 0 ? BASE_IMG_URL : `${BASE_IMG_URL}?blur=${range}`}
-          alt="resim"
-        />
+        <img src={url} alt="resim" />
         <div className="flex flex-col items-center gap-y-3">
           <h2>Blur için kaydırın</h2>
           <input
